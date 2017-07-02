@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>Do Something 1 - PhoneGap Demo</title>
+
+    <link rel="stylesheet" href="screen.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+    <script src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+        window.onload = function () {
+            var myButton = document.getElementById('myButton');
+            myButton.addEventListener('click', capturePhoto, false);
+        };
+
+        function capturePhoto(e) {
+            e.preventDefault();
+            try{
+                var options = {
+                    quality: 50, // Range from 0 to 100
+                    sourceType: Camera.PictureSourceType.CAMERA, // Options are PHOTOLIBRARY, CAMERA, and SAVEDPHOTOALBUM
+                    destinationType: Camera.DestinationType.DATA_URL, // Optoins are DATA_URL, FILE_URI, and NATIVE_URI
+                    correctOrientation: true
+                };
+                /*
+                Other useful options
+                --------------------
+                * allowEdit: true|false
+                            Allow simple editing of image before selection.
+                * correctOrientation: true|false
+                            Rotate the image to correct for the orientation of the device during capture.
+                * saveToPhotoAlbum: true|false
+                            Save the image to the photo album on the device after capture.
+                For more info:
+                    https://github.com/apache/cordova-plugin-camera/
+
+                */
+                navigator.camera.getPicture(onSuccess, onFail, options);
+            }catch (error){
+                console.log('camera api not available');
+            }
+        }
+
+        function onSuccess(theImage) {
+            var thumbnail = document.getElementById('thumbnail');
+            thumbnail.src = "data:image/jpeg;base64," + theImage;
+            // thumbnail.src = theImage;
+        }
+
+        function onFail(message) {
+            alert('Call to getPicture failed: ' + message);
+        }
+    </script>
+
+</head>
+<body>
+    <p>
+        <a href="#" class="button" id="myButton">Capture Photo</a>
+    </p>
+    <p>
+        <img id="thumbnail" src="" />
+    </p>
+</body>
+</html>
