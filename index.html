@@ -25,7 +25,8 @@
                 var options = {
                     quality: 50, // Range from 0 to 100
                     sourceType: Camera.PictureSourceType.CAMERA, // Options are PHOTOLIBRARY, CAMERA, and SAVEDPHOTOALBUM
-                    destinationType: Camera.DestinationType.DATA_URL, // Optoins are DATA_URL, FILE_URI, and NATIVE_URI
+                    //destinationType: Camera.DestinationType.DATA_URL, // Optoins are DATA_URL, FILE_URI, and NATIVE_URI
+                    destinationType: Camera.DestinationType.FILE_URI, // Optoins are DATA_URL, FILE_URI, and NATIVE_URI
                     correctOrientation: true
                 };
                 /*
@@ -49,8 +50,8 @@
 
         function onSuccess(theImage) {
             var thumbnail = document.getElementById('thumbnail');
-            thumbnail.src = "data:image/jpeg;base64," + theImage;
-            // thumbnail.src = theImage;
+//            thumbnail.src = "data:image/jpeg;base64," + theImage;
+             thumbnail.src = theImage;
         }
 
         function onFail(message) {

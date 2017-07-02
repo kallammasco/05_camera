@@ -25,3 +25,7 @@ a#myButton {
 a#myButton:hover {
     background: radial-gradient(darkgray, cornflowerblue);
 }
+
+img{
+    width: 50%;
+}
